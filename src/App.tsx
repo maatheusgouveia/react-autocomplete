@@ -1,46 +1,35 @@
 import { useState } from "react";
-import logo from "./logo.svg";
+
+import { SearchInput } from "./components/SearchInput";
 import "./App.css";
 
 function App() {
-	const [count, setCount] = useState(0);
+	const [search, setSearch] = useState();
+
+	const options = [
+		{ text: "ReactJS", value: "ReactJS" },
+		{ text: "React Native", value: "React Native" },
+		{ text: "Node.js", value: "Node.js" },
+		{ text: "Express.js", value: "Express.js" },
+		{ text: "Angular", value: "Angular" },
+		{ text: "Flutter", value: "Flutter" },
+		{ text: "Vue", value: "Vue" },
+		{ text: "Javascript", value: "Javascript" },
+	];
+
+	function handleOptionSelected(option) {
+		setSearch(option.text);
+	}
 
 	return (
 		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>Hello Vite + React!</p>
-				<p>
-					<button
-						type="button"
-						onClick={() => setCount((count) => count + 1)}
-					>
-						count is: {count}
-					</button>
-				</p>
-				<p>
-					Edit <code>App.tsx</code> and save to test HMR updates.
-				</p>
-				<p>
-					<a
-						className="App-link"
-						href="https://reactjs.org"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Learn React
-					</a>
-					{" | "}
-					<a
-						className="App-link"
-						href="https://vitejs.dev/guide/features.html"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Vite Docs
-					</a>
-				</p>
-			</header>
+			<SearchInput
+				placeholder="Comece a digitar a sua pesquisa"
+				options={options}
+				onOptionSelected={handleOptionSelected}
+				onChange={(e) => setSearch(e.target.value)}
+				value={search || ""}
+			/>
 		</div>
 	);
 }
